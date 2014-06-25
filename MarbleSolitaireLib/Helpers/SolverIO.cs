@@ -14,12 +14,23 @@ namespace MarbleSolitaireLib.Helpers
     public class SolverIO<T> 
     {
 
+        static string AppendPathTo(string fileName)
+        {
+            string result = SolverIO<int>.GetBaseDirectory() + fileName;
+            return result;
+        }
+
+        public static string GetBaseDirectory()
+        {
+            return AppDomain.CurrentDomain.BaseDirectory + Path.DirectorySeparatorChar;
+        }
+
         public static void SaveBinary(T o)
         {
             
             string fileName = "EnumDto.dat";
             IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = File.Open(fileName, FileMode.Create))
+            using (Stream stream = File.Open(AppendPathTo(fileName), FileMode.Create))
             {
                 formatter.Serialize(stream, o);
             }
@@ -30,7 +41,7 @@ namespace MarbleSolitaireLib.Helpers
         {
             
             IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = File.Open(fileName, FileMode.Create))
+            using (Stream stream = File.Open(AppendPathTo(fileName), FileMode.Create))
             {
                 formatter.Serialize(stream, o);
             }
@@ -42,7 +53,7 @@ namespace MarbleSolitaireLib.Helpers
             string fileName = "EnumDto.dat";
             IFormatter formatter = new BinaryFormatter();
             T result;
-            using (Stream stream = File.Open(fileName, FileMode.Open))
+            using (Stream stream = File.Open(AppendPathTo(fileName), FileMode.Open))
             {
                 result = (T)formatter.Deserialize(stream);
             }
@@ -53,7 +64,7 @@ namespace MarbleSolitaireLib.Helpers
         {
             IFormatter formatter = new BinaryFormatter();
             T result;
-            using (Stream stream = File.Open(fileName, FileMode.Open))
+            using (Stream stream = File.Open(AppendPathTo(fileName), FileMode.Open))
             {
                 result = (T)formatter.Deserialize(stream);
             }
@@ -63,7 +74,7 @@ namespace MarbleSolitaireLib.Helpers
         public static void SaveText(Object o)
         {
             string fileName = "snapShots.txt";
-            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+            using (FileStream fs = new FileStream(AppendPathTo(fileName), FileMode.Create))
             {
                 StreamWriter w = new StreamWriter(fs);
                 w.Write(o.ToString());
@@ -74,8 +85,8 @@ namespace MarbleSolitaireLib.Helpers
 
         public static void SaveText(Object o, string fileName)
         {
-            
-            using (FileStream fs = new FileStream(fileName, FileMode.Create))
+
+            using (FileStream fs = new FileStream(AppendPathTo(fileName), FileMode.Create))
             {
                 StreamWriter w = new StreamWriter(fs);
                 w.Write(o.ToString());

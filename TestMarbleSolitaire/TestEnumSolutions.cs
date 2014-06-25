@@ -66,8 +66,9 @@ namespace TestMarbleSolitaire
 
         EnumSolutionsDTO getEnumSolutionsDTO()
         {
-            bool isError = false;
-            EnumSolutionsDTO dto = DataLoader.GetData(out isError);
+            bool isError;
+            EnumSolutionsDTO dto =
+                (EnumSolutionsDTO)Data.DataHelper.GetOrCreateBinary<IEnumSolutionsDTO>("EnumDto.dat", out isError);
             Assert.IsFalse(isError, "data loaded ok");
             return dto;
         }

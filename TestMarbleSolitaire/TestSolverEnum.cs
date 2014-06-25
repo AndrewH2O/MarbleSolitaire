@@ -58,8 +58,8 @@ namespace TestMarbleSolitaire
             return sqb;
         }
 
-
-        
+        const int TOTAL_SOLN_COUNT_AFTER_ONE_MOVE = 1679071;
+        const int TOTAL_SOLN_COUNT = 1679072;
 
 
 
@@ -100,7 +100,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
             
             //assert
-            Assert.IsTrue(solver.SolutionCount>1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
             
          
         }
@@ -146,7 +146,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
             
             //assert
-            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount == TOTAL_SOLN_COUNT, "expected solution count in error");
 
 
         }
@@ -191,7 +191,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
 
             //assert
-            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount == TOTAL_SOLN_COUNT_AFTER_ONE_MOVE, "expected solution count in error");
 
 
         }
@@ -235,7 +235,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
 
             //assert
-            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount == TOTAL_SOLN_COUNT_AFTER_ONE_MOVE, "expected solution count in error");
 
 
         }
@@ -279,7 +279,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
 
             //assert
-            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount == TOTAL_SOLN_COUNT_AFTER_ONE_MOVE, "expected solution count in error");
 
 
         }
@@ -323,7 +323,7 @@ namespace TestMarbleSolitaire
             solver.Solve();
 
             //assert
-            Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
+            Assert.IsTrue(solver.SolutionCount == TOTAL_SOLN_COUNT_AFTER_ONE_MOVE, "expected solution count in error");
 
 
         }

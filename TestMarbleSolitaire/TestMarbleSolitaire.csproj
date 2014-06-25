@@ -22,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;LONGRUNNINGON</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -73,8 +73,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Data\DataHelper.cs" />
     <Compile Include="Helpers\BitHelpers.cs" />
     <Compile Include="Helpers\FakeErrorLog.cs" />
+    <Compile Include="Helpers\BoardFactory.cs" />
     <Compile Include="Solver2Move1.cs" />
     <Compile Include="SolverTestData.cs" />
     <Compile Include="TestBoardAsBit64.cs" />

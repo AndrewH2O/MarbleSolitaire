@@ -39,49 +39,12 @@ namespace TestMarbleSolitaire
     {
         #region setupHelpers
         Helpers.BitHelpers _bitHelpers = new BitHelpers();
-        
-        List<int> getLegalPositions()
-        {
-            return new List<int>() 
-            { 
-                0,0,1,1,1,0,0, //6
-                0,0,1,1,1,0,0, //13
-                1,1,1,1,1,1,1, //20
-                1,1,1,1,1,1,1, //27
-                1,1,1,1,1,1,1, //34
-                0,0,1,1,1,0,0, //41
-                0,0,1,1,1,0,0  //48
-            };
-        }
-
-        List<int> getStart()
-        {
-            return new List<int>() 
-            { 
-                0,0,1,1,1,0,0,//6 - (0-2)
-                0,0,1,1,1,0,0,//13 - (3-5)
-                1,1,1,1,1,1,1,//20 - (6-12)
-                1,1,1,0,1,1,1,//27 - (13-19)
-                1,1,1,1,1,1,1,//34 - (20-26)
-                0,0,1,1,1,0,0,//41 - (27-29)
-                0,0,1,1,1,0,0//48 -  (30-32)
-            };
-        }
-
-        SquareBoard getSquareBoard()
-        {
-            SquareBoard sqb = new SquareBoard(
-                getLegalPositions(), new FakeErrorLog());
-
-            sqb.SetupStart(getStart());
-
-            return sqb;
-        }
 
         EnumSolutionsDTO getEnumSolutionsDTO()
         {
             bool isError = false;
-            EnumSolutionsDTO dto = DataLoader.GetData(out isError);
+            EnumSolutionsDTO dto =
+                (EnumSolutionsDTO)Data.DataHelper.GetOrCreateBinary<IEnumSolutionsDTO>("EnumDto.dat", out isError);
             Assert.IsFalse(isError, "data loaded ok");
             return dto;
         }
@@ -91,14 +54,14 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestInitSolver2()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             Assert.IsTrue(solver2 != null, "error in init solver 2");
         }
 
         [TestMethod]
         public void TestLoadingStartBoardWithString()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             //length 49
             string getStart =
                 "0,0,1,1,1,0,0" +    //6 - (0-2)
@@ -147,7 +110,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadingCurrentBoardWithString()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             
             //length 49
             string getCurrent =
@@ -196,7 +159,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadingStartBoardWithListInt()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             
             //length 49
             List<int> getStart = new List<int>() 
@@ -259,7 +222,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadingCurrentBoardWithListInt()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getCurrent = new List<int>() 
             { 
@@ -319,7 +282,7 @@ namespace TestMarbleSolitaire
         {
             board = StorageBitPacker.CleanString(board);
             StringBuilder sb = new StringBuilder();
-            Mapper m = new Mapper(getSquareBoard());
+            Mapper m = new Mapper(Helpers.BoardFactory.GetSquareBoard());
             for (int i = 0; i < board.Length; i++)
             {
                 int index = m.GetModelToGameByIndex(i);
@@ -335,7 +298,7 @@ namespace TestMarbleSolitaire
         {
 
             List<int> l = new List<int>();
-            Mapper m = new Mapper(getSquareBoard());
+            Mapper m = new Mapper(Helpers.BoardFactory.GetSquareBoard());
             for (int i = 0; i < board.Count; i++)
             {
                 int index = m.GetModelToGameByIndex(i);
@@ -352,7 +315,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestFindAvailableMovesOnGameBoard()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             List<int> getStart = new List<int>() 
             { 
                 0,0,1,1,1,0,0,//6 - (0-2)
@@ -382,7 +345,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestFindAvailableMovesOnGameBoard2()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             string getStart =  
              
                 		"1	1	1"+		
@@ -424,7 +387,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestMakeMove()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             List<int> getStart = new List<int>() 
             { 
                 0,0,1,1,1,0,0,//6 - (0-2)
@@ -458,7 +421,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestUpdateSolutionProgress()
         {
-            Solver2 solver2 = new Solver2(getSquareBoard());
+            Solver2 solver2 = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             //solver2.LoadBoard(getStart(),LoadState.Start);
             ushort piecesCount = 20 - 1- 1;
             ushort moveID = 2 * 100 + 8;
@@ -477,7 +440,7 @@ namespace TestMarbleSolitaire
         public void TestMake5Moves()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -520,7 +483,7 @@ namespace TestMarbleSolitaire
         public void TestMake15Moves()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -561,7 +524,7 @@ namespace TestMarbleSolitaire
         public void TestMake26Moves()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -602,7 +565,7 @@ namespace TestMarbleSolitaire
         public void TestSolutionFromPartialBoard()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -657,7 +620,7 @@ namespace TestMarbleSolitaire
         public void TestSolutionFromCompleteBoard()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -712,7 +675,7 @@ namespace TestMarbleSolitaire
         public void TestNoSolutionFound()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -781,7 +744,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadAsUlongFromPartialWithSoln()
         {
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             ulong completeStart = 31655716;
             ulong win = 65536;
@@ -817,7 +780,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadAsUlongFromCompleteWithSoln()
         {
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             ulong completeStart = 8589869055;
             ulong win = 65536;
@@ -852,7 +815,7 @@ namespace TestMarbleSolitaire
         [TestMethod]
         public void TestLoadAsUlongNoSoln()
         {
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             ulong completeStart = 4835055625;
             ulong win = 65536;
@@ -893,7 +856,7 @@ namespace TestMarbleSolitaire
         public void TestUnknownSolution()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
             List<int> getStart = new List<int>() 
             { 
                 0,0,1,1,1,0,0,
@@ -946,7 +909,7 @@ namespace TestMarbleSolitaire
         public void TestSolutionWhichTakesTimeToFind()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             //List<int> getStart = new List<int>() 
             //{ 
@@ -1015,8 +978,8 @@ namespace TestMarbleSolitaire
         {
             //arrange
             EnumSolutionsDTO dto = getEnumSolutionsDTO();
-            
-            Solver2 solver = new Solver2(getSquareBoard(),dto);
+
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard(), dto);
             List<int> getStart = new List<int>() 
             { 
                 0,0,1,1,1,0,0,
@@ -1070,7 +1033,7 @@ namespace TestMarbleSolitaire
         public void TestHintWithSolutionFromPartialBoard()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -1121,7 +1084,7 @@ namespace TestMarbleSolitaire
         public void TestHintWithSolutionFromPartialBoardToWin()
         {
             //arrange
-            Solver2 solver = new Solver2(getSquareBoard());
+            Solver2 solver = new Solver2(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 

@@ -19,54 +19,15 @@ namespace TestMarbleSolitaire
     [TestClass]
     public class TestEnumSolverIO
     {
+        EnumSolutionsDTO getEnumSolutionsDTO()
+        {
+            bool isError = false;
+            EnumSolutionsDTO dto =
+                (EnumSolutionsDTO)Data.DataHelper.GetOrCreateBinary<IEnumSolutionsDTO>("EnumDto.dat", out isError);
+            Assert.IsFalse(isError, "data loaded ok");
+            return dto;
+        }
         
-        #region setupHelpers
-
-
-        List<int> getLegalPositions()
-        {
-            return new List<int>() 
-            { 
-                0,0,1,1,1,0,0, //6
-                0,0,1,1,1,0,0, //13
-                1,1,1,1,1,1,1, //20
-                1,1,1,1,1,1,1, //27
-                1,1,1,1,1,1,1, //34
-                0,0,1,1,1,0,0, //41
-                0,0,1,1,1,0,0  //48
-            };
-        }
-
-        List<int> getStart()
-        {
-            return new List<int>() 
-            { 
-                0,0,1,0,0,0,0,//6 - (0-2)
-                0,0,1,0,0,0,0,//13 - (3-5)
-                0,0,1,1,1,1,1,//20 - (6-12)
-                0,0,0,0,1,1,1,//27 - (13-19)
-                0,0,0,0,1,1,1,//34 - (20-26)
-                0,0,0,0,1,0,0,//41 - (27-29)
-                0,0,0,0,1,0,0//48 -  (30-32)
-            };
-        }
-
-
-
-        SquareBoard getSquareBoard()
-        {
-            SquareBoard sqb = new SquareBoard(
-                getLegalPositions(), new FakeErrorLog());
-
-            sqb.SetupStart(getStart());
-
-            return sqb;
-        }
-
-
-        #endregion//setupHelpers
-
-
 
         [TestMethod]
         public void TestSaveAndRetrieveFile()
@@ -84,10 +45,12 @@ namespace TestMarbleSolitaire
             Assert.IsTrue(dto[2][1] == 2, "error expected value dto");
             Assert.IsTrue(dto[3][0] == 1, "error expected value dto");
             string fileName = "test.Dat";
-            SolverIO<IEnumSolutionsDTO>.SaveBinary(dto,fileName);
 
-            EnumSolutionsDTO dto2 = 
-                (EnumSolutionsDTO)SolverIO<IEnumSolutionsDTO>.RetrieveBinary(fileName);
+            Data.DataHelper.SaveBinary<IEnumSolutionsDTO>(dto, fileName);
+
+            bool isError;
+            EnumSolutionsDTO dto2 = (EnumSolutionsDTO)Data.DataHelper.GetOrCreateBinary<IEnumSolutionsDTO>(fileName, out isError);
+            
 
             Assert.IsTrue(dto2 != null, "error dto2 should not be null");
             Assert.IsTrue(dto2[0][2] == 3, "error expected value dto2");
@@ -100,7 +63,7 @@ namespace TestMarbleSolitaire
         public void TestEnumerateSolnsFromPartialFile()
         {
 //arrange
-            SolverEnum solver = new SolverEnum(getSquareBoard());
+            SolverEnum solver = new SolverEnum(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -130,8 +93,10 @@ namespace TestMarbleSolitaire
             solver.Solve(SaveState.ToBinary, "EnumDtoPartial.dat");
             
             int piecesCountAtStart = 9;
-            EnumSolutionsDTO dto2 =
-                (EnumSolutionsDTO)SolverIO<IEnumSolutionsDTO>.RetrieveBinary("EnumDtoPartial.dat");
+            bool isError;
+
+            EnumSolutionsDTO dto2 = (EnumSolutionsDTO)Data.DataHelper.GetOrCreateBinary<IEnumSolutionsDTO>("EnumDtoPartial.dat", out isError);
+            
             //assert
             Assert.IsTrue(dto2 != null, "error dto2 should not be null");
             Assert.AreEqual(piecesCountAtStart,dto2.PiecesCount,"error incorrect number of pieces in file");
@@ -149,7 +114,7 @@ namespace TestMarbleSolitaire
         public void TestEnumerateSolnsFromCompleteFile()
         {
             //arrange
-            SolverEnum solver = new SolverEnum(getSquareBoard());
+            SolverEnum solver = new SolverEnum(Helpers.BoardFactory.GetSquareBoard());
 
             List<int> getStart = new List<int>() 
             { 
@@ -179,26 +144,24 @@ namespace TestMarbleSolitaire
             solver.Solve(SaveState.ToBinary, "EnumDto.dat");
             int piecesCountAtStart = 32;
 
-            EnumSolutionsDTO dto2 =
-                (EnumSolutionsDTO)SolverIO<IEnumSolutionsDTO>.RetrieveBinary();
+            EnumSolutionsDTO dto2 = getEnumSolutionsDTO();
+                
             //assert
             Assert.IsTrue(dto2 != null, "error dto2 should not be null");
             Assert.AreEqual(piecesCountAtStart, dto2.PiecesCount, "error incorrect number of pieces in file");
             Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
-
         }
-
 
 
         [TestMethod]
         public void TestSearchBinaryFile()
         {
             string fileNameInTest = "EnumDto.dat";
+            
+            EnumSolutionsDTO dto2 = getEnumSolutionsDTO();
+
             bool preCondition = File.Exists(fileNameInTest);
             Assert.IsTrue(preCondition == true, "The file does not exist create it by running TestEnumerateSolnsFromCompleteFile() ");
-
-            EnumSolutionsDTO dto2 =
-                (EnumSolutionsDTO)SolverIO<IEnumSolutionsDTO>.RetrieveBinary();
 
             ulong completedBoardHasSoln = Array.Find(dto2[32-1], x => x == 8589869055);
             Assert.IsTrue(completedBoardHasSoln == 8589869055, "error expected The completed board exists so it has a solution");
@@ -209,7 +172,7 @@ namespace TestMarbleSolitaire
             
             Assert.IsTrue(board15WithSoln == default(ulong), "error expected Although board15WithSoln {0} has a soln it is not in our list but one of its rotated flipped boards will be", board15WithSoln);
 
-            RotateFlip rf = new RotateFlip(new Mapper(getSquareBoard()));
+            RotateFlip rf = new RotateFlip(new Mapper(Helpers.BoardFactory.GetSquareBoard()));
 
 
             board15WithSoln = 1240916416;
