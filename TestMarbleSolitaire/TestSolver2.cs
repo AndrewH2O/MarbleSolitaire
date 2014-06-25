@@ -2,8 +2,10 @@
 //#undef SOURCE_HAS_TEST_DEF
 #define STORAGE
 //#undef STORAGE
-#define LONGRUNNINGON
-#undef LONGRUNNINGON
+//#define LONGRUNNINGON
+//#undef LONGRUNNINGON
+
+
 //
 //To test everything 
 //comment out #undef SOURCE_HAS_TEST_DEF above and #undef TEST in source
@@ -1005,7 +1007,7 @@ namespace TestMarbleSolitaire
             Assert.AreEqual(ExpectedIsSolution, ActualIsSolution, "IsSolution expectation in error");
         }
 
-
+#if LONGRUNNINGON 
         //[TestMethod, Timeout(3000)]
         //[TestMethod]
         [TestMethod]
@@ -1061,6 +1063,8 @@ namespace TestMarbleSolitaire
 
             Assert.AreEqual(ExpectedIsSolution, ActualIsSolution, "IsSolution expectation in error");
         }
+
+#endif //LONGRUNNINGON
 
         [TestMethod]
         public void TestHintWithSolutionFromPartialBoard()

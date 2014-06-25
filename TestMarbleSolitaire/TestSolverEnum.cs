@@ -1,5 +1,5 @@
-﻿#define LONGRUNNINGON
-#undef LONGRUNNINGON
+﻿//#define LONGRUNNINGON
+//#undef LONGRUNNINGON
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

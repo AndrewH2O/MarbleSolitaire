@@ -1,7 +1,6 @@
-﻿#define LONGRUNNINGON
-#undef LONGRUNNINGON
-#define DAT
-//#undef DAT
+﻿//#define LONGRUNNINGON
+//#undef LONGRUNNINGON
+
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -140,7 +139,7 @@ namespace TestMarbleSolitaire
 
         }
 
-#if DAT
+
 #if LONGRUNNINGON
 
         //[TestMethod, Timeout(3000)]
@@ -188,7 +187,7 @@ namespace TestMarbleSolitaire
             Assert.IsTrue(solver.SolutionCount > 1, "expected solution count in error");
 
         }
-#endif //LONGRUNNINGON
+
 
 
         [TestMethod]
@@ -245,7 +244,8 @@ namespace TestMarbleSolitaire
             //ulong board29LongRunningNoSoln = Array.Find(dto2[29-1], x => x == 8589852407);
             //Assert.IsTrue(board29LongRunningNoSoln == default(ulong), "error expected board29LongRunningNoSoln to have no soln");
         }
-#endif //DAT
-        
+#endif //LONGRUNNINGON
+
+
     }
 }

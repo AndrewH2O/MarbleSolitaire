@@ -1,4 +1,5 @@
-﻿
+﻿//#define LONGRUNNINGON
+//#undef LONGRUNNINGON
 
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +12,7 @@ using System.Diagnostics;
 
 namespace TestMarbleSolitaire
 {
-    
+#if LONGRUNNINGON     
     [TestClass]
     public class TestEnumSolnsData
     {
@@ -73,7 +74,7 @@ namespace TestMarbleSolitaire
 
         #endregion//setupHelpers
         
-        
+      
         [TestMethod]
         public void TestSearchForASolutionByBoardAndPieces
             ()
@@ -161,6 +162,6 @@ namespace TestMarbleSolitaire
             Assert.IsTrue(count < numberRFs * uniqueCountBeforeRF, "error TotalDistinctBoards count");
         }
     }
-
+#endif //LONGRUNNINGON
 
 }

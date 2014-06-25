@@ -1,12 +1,25 @@
-﻿WARNING some tests are long running these are 
-identified with TestCategory 'LongerRuntime' and can be viewed
-in the test explorer by selecting Traits from the drop down filter.
-Total runtime using 1 core 3.4ghz approx 8min. Use 8gb ram.
+﻿WARNING some tests are long running these conditionally compiled by adding 
+pre compile flag LONGRUNNINGON and TestEnumerateSolnsFromCompleteFile() generates a DAT file 
+that other tests use. 
 
-To avoid inadvertantly running these I have used pre processor define of 
-LONGRUNNINGON
-uncomment the undef at the top of the file to run these tests (after build)
+Also in test explorer some have the trait 'LongerRuntime' by selecting Traits from the drop down filter.
+
+(Total runtime using 1 core 3.4ghz approx 8min. Use 8gb ram.)
+
+TO RUN THESE TESTS add conditional compilation symbol (by right clicking on test project
+and clicking under the build tab) to: LONGRUNNINGON
+
+
+Originally used pre  defines on file by file basis: 
 
 TestSolverEnum - all
-TestEnumSolverIO -1 test
-TestSolver2 - 1 test
+TestEnumSolutions - all
+TestEnumSolverIO -2 test
+TestSolver2 - 2 test
+
+
+81 Tests
+with conditional compile flag of LONGRUNNINGON
+97 Tests
+
+
