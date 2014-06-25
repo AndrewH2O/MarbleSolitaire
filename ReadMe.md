@@ -13,10 +13,11 @@ vertically or horizontally. This project explores all the possible board positio
 ## Contents of Solution
 
 Uses a Modular structure so any front end could be used, projects are:
+
 1. MarbleSolitaireLib - contains the solver which uses depth first search and in memory memoization 
 2. MarbleSolitaireModelLib - model of a generic square based board
 3. MarbleSolCommonLib - Contains BitBoard used for bit twiddling amongst other things
-4. MarbleSolitaireViewModel - very very dependency light on view technology. Contains an Undo Redo module for stepping back and forth through a game
+4. MarbleSolitaireViewModel - very very dependency light on view technology. Contains an Undo Redo module for stepping ...back and forth through a game
 5. MarbleSolitaire - The View - WPF app but could be anything
 6. TestMarbleSolitaire - tests some of which may take a couple of minutes to run - see readme.txt in the test project for more details as these can be optinally compiled.
 
