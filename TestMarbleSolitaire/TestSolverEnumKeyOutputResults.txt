@@ -1,0 +1,62 @@
+Test Name:	TestEnumerateSolnsFromCompleteBoard
+Test Outcome:	Passed
+Result StandardOutput:	
+Debug Trace:
+Time taken to enumerate all 124833:
+total dfs: 23475688
+total seen for count of 3: 0
+total in storage: 187636299
+total in solution count: 1679072
+start board:
+8589869055
+
+Test Name:	TestEnumerateSolnsAfterMove1Rotated0
+Test Outcome:	Passed
+Result StandardOutput:	
+Debug Trace:
+Time taken to enumerate all 124233:
+total dfs: 23475687
+total seen for count of 3: 0
+total in storage: 187636298
+total in solution count: 1679071
+start board:
+8589934063
+
+Test Name:	TestEnumerateSolnsAfterMove1Rotated90
+Test Outcome:	Passed
+Result StandardOutput:	
+Debug Trace:
+Time taken to enumerate all 121122:
+total dfs: 23475687
+total seen for count of 3: 0
+total in storage: 187636298
+total in solution count: 1679071
+start board:
+8589541375
+
+Test Name:	TestEnumerateSolnsAfterMove1Rotated180
+Test Outcome:	Passed
+Result StandardOutput:	
+Debug Trace:
+Time taken to enumerate all 129982:
+total dfs: 23475687
+total seen for count of 3: 0
+total in storage: 187636298
+total in solution count: 1679071
+start board:
+8313110527
+
+Test Name:	TestEnumerateSolnsAfterMove1Rotated270
+Test Outcome:	Passed
+Result StandardOutput:	
+Debug Trace:
+Time taken to enumerate all 121381:
+total dfs: 23475687
+total seen for count of 3: 0
+total in storage: 187636298
+total in solution count: 1679071
+start board:
+8589885439
+
+
+

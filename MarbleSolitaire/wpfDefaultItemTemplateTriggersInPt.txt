@@ -1,0 +1,39 @@
+<MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="APs:ShowStateAP.ShowState" Value="0"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#3DDADADA"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFDADADA"/>
+                                <Setter Property="Background" Value="#FF1B1717"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="APs:ShowStateAP.ShowState" Value="0"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#3D26A0DA"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF26A0DA"/>
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="False"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="APs:ShowStateAP.ShowState" Value="1"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#3DDADADA"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFDADADA"/>
+                                <Setter Property="Background" Value="#FF1B1717"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Selector.IsSelectionActive" Value="True"/>
+                                    <Condition Property="IsSelected" Value="True"/>
+                                    <Condition Property="APs:ShowStateAP.ShowState" Value="1"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="#3D26A0DA"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF26A0DA"/>
+                            </MultiTrigger>

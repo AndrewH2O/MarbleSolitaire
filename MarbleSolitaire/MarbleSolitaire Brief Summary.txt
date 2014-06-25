@@ -1,0 +1,6 @@
+GameViewModel2 (GVM) uses GameAttributes and an IErrorLog 
+
+Focusing on the game as the error logging is rudimentary and its contract is easily satisfied and cross cutting concerns is not really relevent here.
+
+The GVM Uses GameAttributes to GetBoard (in our case a SquareBoard although it could be used as an extensibility point to work with other shapes) and a start position. The GameAttributes provides the start position for the board; This makes testing for different start positions possible. 
+
