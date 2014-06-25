@@ -82,7 +82,7 @@ This is a simple pass through class which checks if we are in 'design mode' and 
 The project MarbleSolitaire needs to target x64 architecture as it needs upward of 8gb ram to fully enumerate all boards
 
 This can be set by right clicking on the project and choosing the x64 platform target from the Build tab.
-Additionally Tests require that x64 is set - this can be done under the Test menu - default processor architecture
+Additionally Tests require that x64 is set - this can be done under the Test menu - test settings - default processor architecture
 select x64 otherwise the tests will fail due to out of memory issues.
 
 ### Editing xaml
