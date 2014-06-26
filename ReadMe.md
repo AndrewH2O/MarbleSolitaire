@@ -6,27 +6,27 @@
 
 <p>There are 57.7 x 10<sup>19</sup> ways of playing this game and ending up with a 
 single piece at the end of the game - a winning board has a single piece in the centre of the board. 
-There are only 1,679,072 unique winning board positions after taking account of rotations and  either 
-vertically or horizontally. This project explores all the possible board positions that lead to a winning board.
+There are only 1,679,072 unique winning board positions after taking account of rotations and either 
+vertical or horizontal symmetry. This project explores all the possible board positions that lead to a win.
 </p>
 
 ## Contents of Solution
 
-Uses a Modular structure so any front end could be used, projects are:
+Uses a Modular structure so any view could be used with the libraries, projects are:
 
-1. MarbleSolitaireLib - contains the solver which uses depth first search and in memory memoization 
-2. MarbleSolitaireModelLib - model of a generic square based board
-3. MarbleSolCommonLib - Contains BitBoard used for bit twiddling amongst other things
-4. MarbleSolitaireViewModel - very very dependency light on view technology. Contains an Undo Redo module for stepping ...back and forth through a game
+1. MarbleSolitaireLib - contains the solver which uses depth first search and memoization 
+2. MarbleSolitaireModelLib - contains the model of a generic board
+3. MarbleSolCommonLib - Contains a base board used for bit twiddling amongst other things
+4. MarbleSolitaireViewModel - very very dependency light on view technology. Features Undo Redo for exploring a game
 5. MarbleSolitaire - The View - WPF app but could be anything
-6. TestMarbleSolitaire - tests some of which may take a couple of minutes to run - see readme.txt in the test project for more details as these can be optinally compiled.
+6. TestMarbleSolitaire - tests some of which may take a few of minutes to run - see readme.txt in the test project for more details as these can be optinally compiled.
 
 Doesn't cache the winning positions as it is more interesting to see which board positions can be searched instantly from those taking a few seconds.
 
 ## Winning Positions
 
 The crux is the output of TestCountUniqueSolutions.   
-(select test and click on the output):
+(The test debug output produces this listing):
 
 Unique number of winning boards listed by pieces count
 
@@ -69,9 +69,9 @@ Unique number of winning boards listed by pieces count
 
 
 
-## ViewModel dependency on View
+## ViewModel - dependency on View
  
-Very very minimal - only the DesignerWorkFlow.cs file under the serviceLocator folder takes a dependency on WPF the Presentation framework dll.
+Very very minimal - only the DesignerWorkFlow.cs file under the serviceLocator folder takes a dependency on WPF's Presentation framework dll.
 This is a simple pass through class which checks if we are in 'design mode' and resolves dependencies as appropriate so can easily be adapted.
 
 
@@ -79,9 +79,9 @@ This is a simple pass through class which checks if we are in 'design mode' and 
 
 ### Requires x64 Platform target
 
-The project MarbleSolitaire needs to target x64 architecture as it needs upward of 8gb ram to fully enumerate all boards
+The project MarbleSolitaire needs to target x64 architecture as it needs 8gb ram to fully enumerate all boards
 
-This can be set by right clicking on the project and choosing the x64 platform target from the Build tab.
+The platform target can be set by right clicking on the project and choosing the x64 platform target from the Build tab.
 Additionally Tests require that x64 is set - this can be done under the Test menu - test settings - default processor architecture
 select x64 otherwise the tests will fail due to out of memory issues.
 
