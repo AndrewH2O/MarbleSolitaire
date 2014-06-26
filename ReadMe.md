@@ -2,7 +2,7 @@
 
 (aka Peg Solitaire)
 
-## Problem
+## The Problem
 
 <p>There are 57.7 x 10<sup>19</sup> ways of playing this game and ending up with a 
 single piece at the end of the game - a winning board has a single piece in the centre of the board. 
@@ -19,7 +19,7 @@ Uses a Modular structure so any view could be used with the libraries, projects 
 3. MarbleSolCommonLib - Contains a base board used for bit twiddling amongst other things
 4. MarbleSolitaireViewModel - very very dependency light on view technology. Features Undo Redo for exploring a game
 5. MarbleSolitaire - The View - WPF app but could be anything
-6. TestMarbleSolitaire - tests some of which may take a few of minutes to run - see readme.txt in the test project for more details as these can be optinally compiled.
+6. TestMarbleSolitaire - tests some of which may take a few of minutes to run - see readme.txt in the test project for more details as these can be optionally compiled.
 
 Doesn't cache the winning positions as it is more interesting to see which board positions can be searched instantly from those taking a few seconds.
 
@@ -88,7 +88,7 @@ select x64 otherwise the tests will fail due to out of memory issues.
 ### Editing xaml
 
 Editing the view from the MarbleSolitaire project using Expression Blend designer requires 32bit build so switch that platform target back to any Cpu, build 
-then switch back to targeting x64 as mentioned above to run the project.
+before editing and then switch back to targeting x64 as mentioned above to run the project.
 
 ## View
 
