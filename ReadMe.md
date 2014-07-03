@@ -1,6 +1,6 @@
 # Marble Solitaire Solution Explorer
 
-(aka Peg Solitaire)
+(aka Peg Solitaire) - inspiration: http://www.durangobill.com/Peg33.html
 
 ## The Problem
 
