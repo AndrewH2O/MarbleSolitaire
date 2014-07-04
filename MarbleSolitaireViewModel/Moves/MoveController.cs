@@ -200,7 +200,7 @@ namespace MarbleSolitaireViewModel.ViewModel.Moves
         public void InitialisePiece()
         {
             clearStacks();
-
+            _piecesCount = 0;
             int viewIndex = 0;
 
             List<int> simpleBoardInModelCoords = _sqb.BoardItems;
