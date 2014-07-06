@@ -85,6 +85,8 @@ The platform target can be set by right clicking on the project and choosing the
 Additionally Tests require that x64 is set - this can be done under the Test menu - test settings - default processor architecture
 select x64 otherwise the tests will fail due to out of memory issues.
 
+If running on Windows 7 requires Segoe UI font per http://support.microsoft.com/kb/2729094
+
 ### Editing xaml
 
 Editing the view from the MarbleSolitaire project using Expression Blend designer requires 32bit build so switch that platform target back to any Cpu, build 
